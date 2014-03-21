@@ -13,6 +13,6 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<context:component-scan base-package="a.b.c" />
+	<context:component-scan base-package="fizzbuzz.springh2" />
 
 </beans>

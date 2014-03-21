@@ -1,4 +1,4 @@
-package a.b.c;
+package fizzbuzz.springh2;
 
 import java.util.HashMap;
 import java.util.Map;

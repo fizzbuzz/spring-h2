@@ -1,4 +1,4 @@
-package a.b.c;
+package fizzbuzz.springh2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,6 +15,11 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import fizzbuzz.springh2.Department;
+import fizzbuzz.springh2.Employee;
+import fizzbuzz.springh2.Item;
+import fizzbuzz.springh2.Order;
 
 @ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)

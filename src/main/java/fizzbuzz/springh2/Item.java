@@ -1,5 +1,5 @@
 
-package a.b.c;
+package fizzbuzz.springh2;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

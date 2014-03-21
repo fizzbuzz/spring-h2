@@ -1,4 +1,4 @@
-package a.b.c;
+package fizzbuzz.springh2;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
