@@ -1,4 +1,4 @@
-package fizzbuzz.springh2.manytoone;
+package fizzbuzz.springh2.onetoone;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

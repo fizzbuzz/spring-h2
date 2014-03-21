@@ -5,6 +5,8 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,9 +17,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import fizzbuzz.springh2.manytoone.Department;
-import fizzbuzz.springh2.manytoone.Employee;
 
 @ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -93,7 +92,48 @@ public class PersistenceTests {
 		Employee loadEmployee1 = entityManager.find(Employee.class, employee1.getId());
 		assertNotNull(loadEmployee1.getDepartment().getId());
 		Employee loadEmployee2 = entityManager.find(Employee.class, employee2.getId());
+		assertNotNull(loadEmployee2.getDepartment().getId());
 		Assert.assertThat(loadEmployee1.getDepartment().getId(), not(equalTo(loadEmployee2.getDepartment().getId())));
 	}
 
+	@Test
+	@Transactional
+	public void testOneToManyEmployeePhone() throws Exception {
+		
+		Employee employee1 = new Employee();
+		Phone phone1 = new Phone();
+		Phone phone2 = new Phone();
+		
+		employee1.setPhones(new ArrayList<Phone>());
+		
+		employee1.getPhones().add(phone1);
+		employee1.getPhones().add(phone2);
+		
+		entityManager.persist(phone1);
+		entityManager.persist(phone2);
+		entityManager.persist(employee1);
+		entityManager.flush();
+		Employee loadEmployee1 = entityManager.find(Employee.class, employee1.getId());
+		
+		assertNotNull(loadEmployee1.getPhones().get(0).getId());
+		assertNotNull(loadEmployee1.getPhones().get(1).getId());
+		Assert.assertThat(loadEmployee1.getPhones().get(0).getId(), not(equalTo(loadEmployee1.getPhones().get(1).getId())));
+	}
+	
+	@Test
+	@Transactional
+	public void testLazyParkingSpaceEmployee() throws Exception {
+		
+		Employee employee1 = new Employee();
+		ParkingSpace parkingSpace = new ParkingSpace();
+		employee1.setParkingSpace(parkingSpace);
+		
+		entityManager.persist(employee1);
+		entityManager.flush();
+		Employee loadEmployee1 = entityManager.find(Employee.class, employee1.getId());
+		
+		assertNotNull(loadEmployee1);
+//		assertNotNull(loadEmployee1.getPhones().get(1).getId());
+//		Assert.assertThat(loadEmployee1.getPhones().get(0).getId(), not(equalTo(loadEmployee1.getPhones().get(1).getId())));
+	}
 }

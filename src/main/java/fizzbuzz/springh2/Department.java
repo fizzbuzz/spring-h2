@@ -1,9 +1,12 @@
-package fizzbuzz.springh2.manytoone;
+package fizzbuzz.springh2;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department {
@@ -13,6 +16,10 @@ public class Department {
 	Integer id;
 	String name;
 	Long salary;
+	
+	@OneToMany(mappedBy="department")
+	List<Employee> employees;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -31,4 +38,12 @@ public class Department {
 	public void setSalary(Long salary) {
 		this.salary = salary;
 	}
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+	
+	
 }

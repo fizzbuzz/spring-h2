@@ -8,8 +8,10 @@
 
         <class>fizzbuzz.springh2.Item</class>
         <class>fizzbuzz.springh2.Order</class>
-        <class>fizzbuzz.springh2.manytoone.Employee</class>
-        <class>fizzbuzz.springh2.manytoone.Department</class>
+        <class>fizzbuzz.springh2.Employee</class>
+        <class>fizzbuzz.springh2.Department</class>
+        <class>fizzbuzz.springh2.Phone</class>
+        <class>fizzbuzz.springh2.ParkingSpace</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
 	</persistence-unit>
