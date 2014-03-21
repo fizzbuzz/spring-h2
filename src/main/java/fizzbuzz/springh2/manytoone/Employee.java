@@ -29,7 +29,6 @@ public class Employee {
 	}
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-//	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="DEPT_ID")
 	Department department;
 	public Department getDepartment() {

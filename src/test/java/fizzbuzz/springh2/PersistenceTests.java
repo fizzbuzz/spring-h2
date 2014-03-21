@@ -1,9 +1,9 @@
 package fizzbuzz.springh2;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,10 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import fizzbuzz.springh2.Department;
-import fizzbuzz.springh2.Employee;
-import fizzbuzz.springh2.Item;
-import fizzbuzz.springh2.Order;
+import fizzbuzz.springh2.manytoone.Department;
+import fizzbuzz.springh2.manytoone.Employee;
 
 @ContextConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -79,26 +77,23 @@ public class PersistenceTests {
 	@Test
 	@Transactional
 	public void testManyToOneEmployeeDepartment() throws Exception {
+		
 		Department department1 = new Department();
-//		entityManager.persist(department1);
 		Employee employee1 = new Employee();
+		employee1.setDepartment(department1);
 		
 		Department department2 = new Department();
 		Employee employee2 = new Employee();
-		
-		employee1.setDepartment(department1);
 		employee2.setDepartment(department2);
 		
 		
 		entityManager.persist(employee1);
 		entityManager.persist(employee2);
 		entityManager.flush();
-		Employee load1 = entityManager.find(Employee.class, employee1.getId());
-		assertNotNull(load1.getDepartment().getId());
-		Employee load2 = entityManager.find(Employee.class, employee2.getId());
-		assertFalse(load1.getDepartment().getId().equals(load2.getDepartment().getId()));
-		Assert.assertThat(load1.getDepartment().getId(), not(equalTo(load2.getDepartment().getId())));
-//		assertEquals(load1.getDepartment().getId(), load2.getDepartment().getId());
+		Employee loadEmployee1 = entityManager.find(Employee.class, employee1.getId());
+		assertNotNull(loadEmployee1.getDepartment().getId());
+		Employee loadEmployee2 = entityManager.find(Employee.class, employee2.getId());
+		Assert.assertThat(loadEmployee1.getDepartment().getId(), not(equalTo(loadEmployee2.getDepartment().getId())));
 	}
 
 }
